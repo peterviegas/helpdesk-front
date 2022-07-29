@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Credenciais } from './../../models/credenciais';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,17 +18,19 @@ export class LoginComponent implements OnInit {
   email = new FormControl(null, Validators.email);
   senha = new FormControl(null, Validators.minLength(3));
 
-  constructor() { }
+  constructor(private service: AuthService) { }
+  //constructor(private toast: ToastrService) { }
+  //Problema na instalação do Toast aula 37, ficamos sem a mensagem
+
+  logar(){
+    this.service.authenticate;
+  }
 
   ngOnInit(): void {
   }
 
   validaCampos(): boolean{
-    if(this.email.valid && this.senha.valid){
-      return true;
-    }else{
-      return false;
-    }
+    return this.email.valid && this.senha.valid      
   }
 
 }
